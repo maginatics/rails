@@ -180,13 +180,14 @@ module ActiveRecord
         begin
           if block_given?
             if requires_new || open_transactions == 0
+              transaction_open = true
               if open_transactions == 0
+                increment_open_transactions
                 begin_db_transaction
               elsif requires_new
                 create_savepoint
+                increment_open_transactions
               end
-              increment_open_transactions
-              transaction_open = true
               @_current_transaction_records.push([])
             end
             yield
