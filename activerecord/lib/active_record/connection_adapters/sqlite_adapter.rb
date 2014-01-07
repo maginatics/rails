@@ -319,7 +319,12 @@ module ActiveRecord
       end
 
       def rollback_db_transaction #:nodoc:
-        log('rollback transaction',nil) { @connection.rollback }
+        # We do not need to rollback if SQLite3 rolled back on its own.
+        # We need to guard against that by checking if the transaction is still
+        # active.
+        if @connection.transaction_active?
+          log('rollback transaction',nil) { @connection.rollback }
+        end
       end
 
       # SCHEMA STATEMENTS ========================================
