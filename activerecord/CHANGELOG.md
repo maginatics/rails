@@ -1,3 +1,12 @@
+*   Avoid rolling back transactions twice when using SQLite3. As the driver may
+    rollback a statement or a transaction on error, the caller must check the
+    state of the transaction
+    (http://www.sqlite.org/lang_transaction.html).
+
+    Fixes: #13638
+
+    *Timur Alperovich*
+
 *   Correctly escape PostgreSQL arrays.
 
     Fixes: CVE-2014-0080
