@@ -1,3 +1,12 @@
+*   Avoid rolling back transactions twice when using SQLite3. As the driver may
+    rollback a statement or a transaction on error, the caller must check the
+    state of the transaction
+    (http://www.sqlite.org/lang_transaction.html).
+
+    Fixes: #13638
+
+    *Timur Alperovich*
+
 ## Rails 4.0.4 (March 14, 2014) ##
 
 *   Only save has_one associations if record has changes.
