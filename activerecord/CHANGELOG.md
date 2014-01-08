@@ -1,3 +1,9 @@
+*   Ensure SQLite3 statements are closed on errors.
+
+    Fixes: #13631
+
+	*Timur Alperovich*
+
 *   Avoid rolling back transactions twice when using SQLite3. As the driver may
     rollback a statement or a transaction on error, the caller must check the
     state of the transaction
