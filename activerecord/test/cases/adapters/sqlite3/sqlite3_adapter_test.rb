@@ -31,8 +31,8 @@ module ActiveRecord
       end
 
       # sqlite databses should be able to support any type and not
-      # just the ones mentioned in the native_database_types. 
-      # Therefore test_invalid column should always return true 
+      # just the ones mentioned in the native_database_types.
+      # Therefore test_invalid column should always return true
       # even if the type is not valid.
       def test_invalid_column
         assert @conn.valid_type?(:foobar)
@@ -378,6 +378,21 @@ module ActiveRecord
             returns(true)
         SQLite3::Database.any_instance.expects(:rollback).once.returns()
         @conn.rollback_db_transaction
+      end
+
+      def test_statement_closed
+        db = SQLite3::Database.new(ActiveRecord::Base.
+            configurations['arunit']['database'])
+        statement = SQLite3::Statement.new(db,
+            'CREATE TABLE statement_test (number integer not null)')
+        statement.stubs(:step).raises(SQLite3::BusyException, 'busy')
+        statement.stubs(:columns).once.returns([])
+        statement.expects(:close).once
+        SQLite3::Statement.stubs(:new).returns(statement)
+
+        assert_raise ActiveRecord::StatementInvalid do
+          @conn.exec_query 'select * from statement_test'
+        end
       end
 
       private
