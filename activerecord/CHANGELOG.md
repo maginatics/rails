@@ -1,3 +1,11 @@
+*   Reap connections that were checked out by now-dead threads, instead
+    of waiting until they disconnect by themselves. Before this change,
+    a suitably constructed series of short-lived threads could starve
+    the connection pool, without ever having more than a couple alive at
+    the same time.
+
+    *Matthew Draper*
+
 *   Ensure SQLite3 statements are closed on errors.
 
     Fixes: #13631
