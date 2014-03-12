@@ -3,7 +3,7 @@ version = File.read(File.expand_path('../../RAILS_VERSION', __FILE__)).strip
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'activerecord'
-  s.version     = version
+  s.version     = '4.0.3.maginatics.1'
   s.summary     = 'Object-relational mapper framework (part of Rails).'
   s.description = 'Databases on Rails. Build a persistent domain model by mapping database tables to Ruby classes. Strong conventions for associations, validations, aggregations, migrations, and testing come baked-in.'
 
