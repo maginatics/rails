@@ -3,7 +3,7 @@ version = File.read(File.expand_path('../RAILS_VERSION', __FILE__)).strip
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'rails'
-  s.version     = '4.0.4.maginatics.1'
+  s.version     = '4.0.4.maginatics.2'
   s.summary     = 'Full-stack web application framework.'
   s.description = 'Ruby on Rails is a full-stack web framework optimized for programmer happiness and sustainable productivity. It encourages beautiful code by favoring convention over configuration.'
 
@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'activesupport', version
   s.add_dependency 'actionpack',    version
-  s.add_dependency 'activerecord',  '4.0.4.maginatics.1'
+  s.add_dependency 'activerecord',  '4.0.4.maginatics.2'
   s.add_dependency 'actionmailer',  version
   s.add_dependency 'railties',      version
 
